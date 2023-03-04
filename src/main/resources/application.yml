@@ -1,13 +1,59 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:4306/jumpin
-    username: root
-    password: root
+    url: jdbc:mysql://localhost:3307/astrocorner  # provided by docker container
+    username: root                                # provided by docker container
+    password: root                                # provided by docker container
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            client-id: 533972550540-qa05dtbe83pb8o319mn8qj6ilaoul4kr.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+          facebook:
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            client-id: 752047612910692
+            client-secret: 7599301942a2f0839c452c78bb87cbf2
+            scope:
+              - email
+              - public_profile
+          github:
+            clientId: Iv1.6d4e9d97f4b1767f
+            clientSecret: d6d0019647c2f8822f559058875b36183194eb8e
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+
+  mail:
+    host: localhost
+    username: uhello
+    password: phello
+    port: 4025
+
+app:
+  base-url: http://localhost:8080/
+  security:
+    jwt:
+      access:
+        secret: SECRET_KEY_FOR_ACCESS_TOKEN
+        expiration-ms: 900000 # 900000 # 15 min
+      refresh:
+        secret: SECRET_KEY_FOR_REFRESH_TOKEN
+        expiration-ms: 300000000 # 1296000000 # 15 days
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - http://localhost:8080/test/authenticated
