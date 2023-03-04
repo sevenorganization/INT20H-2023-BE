@@ -7,6 +7,7 @@ import org.sevenorganization.int20h2023be.domain.ProjectStatus;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,6 +35,12 @@ public class Project {
 
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private List<ProjectMember> projectMembers;
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<Invitation> invitations;
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<Application> applications;
 
     public Project(String title) {
         this.title = title;
