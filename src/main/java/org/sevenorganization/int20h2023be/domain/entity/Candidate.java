@@ -10,6 +10,7 @@ import org.sevenorganization.int20h2023be.domain.UserRole;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,6 +27,12 @@ public class Candidate extends User {
     private Resume resume;
 
     private Boolean notifyByTechnologyFlag = false;
+
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.EAGER)
+    private Set<Invitation> invitations;
+
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.EAGER)
+    private Set<Application> applications;
 
     public Candidate(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password, UserRole.CANDIDATE);
