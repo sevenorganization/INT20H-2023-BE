@@ -23,8 +23,8 @@ public class Resume {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "candidate_id", referencedColumnName = "id")
-    private Candidate candidate;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "resume_technologie",
@@ -44,8 +44,8 @@ public class Resume {
     @Enumerated(EnumType.STRING)
     private Workload workload;
 
-    public Resume(Candidate candidate, Set<Technology> technologyStack, Set<Language> languages, String portfolioUrl, Workload workload) {
-        this.candidate = candidate;
+    public Resume(User user, Set<Technology> technologyStack, Set<Language> languages, String portfolioUrl, Workload workload) {
+        this.user = user;
         this.technologyStack = technologyStack;
         this.languages = languages;
         this.portfolioUrl = portfolioUrl;

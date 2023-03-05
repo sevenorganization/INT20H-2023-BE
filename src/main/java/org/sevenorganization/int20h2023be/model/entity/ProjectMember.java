@@ -20,9 +20,9 @@ public class ProjectMember {
     private ProjectMemberKey id;
 
     @ManyToOne
-    @MapsId("candidateId")
-    @JoinColumn(name = "candidate_id")
-    private Candidate candidate;
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @MapsId("projectId")
@@ -33,8 +33,8 @@ public class ProjectMember {
     @Enumerated(EnumType.STRING)
     private ProjectRole projectRole;
 
-    public ProjectMember(Candidate candidate, Project project, ProjectRole projectRole) {
-        this.candidate = candidate;
+    public ProjectMember(User user, Project project, ProjectRole projectRole) {
+        this.user = user;
         this.project = project;
         this.projectRole = projectRole;
     }

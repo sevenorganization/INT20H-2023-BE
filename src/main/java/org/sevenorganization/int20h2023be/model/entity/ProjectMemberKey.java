@@ -17,8 +17,8 @@ import java.util.Objects;
 @Embeddable
 public class ProjectMemberKey implements java.io.Serializable {
 
-    @Column(name = "candidate_id")
-    private Long candidateId;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "project_id")
     private Long projectId;
@@ -28,12 +28,12 @@ public class ProjectMemberKey implements java.io.Serializable {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ProjectMemberKey that = (ProjectMemberKey) o;
-        return candidateId != null && Objects.equals(candidateId, that.candidateId)
+        return userId != null && Objects.equals(userId, that.userId)
                 && projectId != null && Objects.equals(projectId, that.projectId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(candidateId, projectId);
+        return Objects.hash(userId, projectId);
     }
 }

@@ -60,6 +60,20 @@ public class User {
 
     private Boolean locked = false;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<ProjectMember> projects;
+
+    @OneToOne(mappedBy = "user")
+    private Resume resume;
+
+    private Boolean notifyByTechnologyFlag = false;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Invitation> invitations;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Application> applications;
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;

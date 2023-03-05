@@ -20,8 +20,8 @@ public class Invitation {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "candidate_id", referencedColumnName = "id")
-    private Candidate candidate;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
@@ -30,8 +30,8 @@ public class Invitation {
     @Column(length = 1000)
     private String message;
 
-    public Invitation(Candidate candidate, Project project, String message) {
-        this.candidate = candidate;
+    public Invitation(User user, Project project, String message) {
+        this.user = user;
         this.project = project;
         this.message = message;
     }
