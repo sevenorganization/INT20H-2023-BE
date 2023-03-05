@@ -6,7 +6,6 @@ import org.sevenorganization.int20h2023be.model.entity.Project;
 import org.sevenorganization.int20h2023be.model.entity.User;
 import org.sevenorganization.int20h2023be.model.enumeration.ProjectRole;
 import org.sevenorganization.int20h2023be.repository.ProjectRepository;
-import org.sevenorganization.int20h2023be.service.CandidateService;
 import org.sevenorganization.int20h2023be.service.ProjectMemberService;
 import org.sevenorganization.int20h2023be.service.ProjectService;
 import org.springframework.stereotype.Service;

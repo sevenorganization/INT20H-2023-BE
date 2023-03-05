@@ -1,5 +1,6 @@
 package org.sevenorganization.int20h2023be.service;
 
+import org.sevenorganization.int20h2023be.model.entity.ProjectMember;
 import org.sevenorganization.int20h2023be.model.entity.User;
 import org.sevenorganization.int20h2023be.model.enumeration.LanguageName;
 import org.sevenorganization.int20h2023be.model.enumeration.TechnologyName;
@@ -21,4 +22,8 @@ public interface CandidateService {
     boolean isCandidateFree(User user);
 
     User findCandidateByEmail(String email);
+    ProjectMember findActiveProjectMember(User user);
+
+    boolean hasNoActiveProject(User user);
+
 }

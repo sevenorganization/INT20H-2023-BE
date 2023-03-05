@@ -12,7 +12,7 @@ import java.security.Principal;
 @RequestMapping("/test")
 public class TestResource {
     @GetMapping("/all")
-    public ResponseEntity<String> all() {
+    public ResponseEntity<String> all(Principal principal) {
         return ResponseEntity.ok("hello all");
     }
 

@@ -1,8 +1,10 @@
 package org.sevenorganization.int20h2023be.service.impl;
 
 import lombok.RequiredArgsConstructor;
+
 import org.sevenorganization.int20h2023be.exception.EntityNotFoundException;
 import org.sevenorganization.int20h2023be.model.entity.Language;
+import org.sevenorganization.int20h2023be.model.entity.ProjectMember;
 import org.sevenorganization.int20h2023be.model.entity.Technology;
 import org.sevenorganization.int20h2023be.model.entity.User;
 import org.sevenorganization.int20h2023be.model.enumeration.LanguageName;
@@ -81,5 +83,18 @@ public class DefaultCandidateService implements CandidateService {
                 .filter(user -> user.getResume().getWorkload().equals(workload))
                 .toList();
         return new PageImpl<>(matchingCandidates);
+    }
+
+    @Override
+    public ProjectMember findActiveProjectMember(User user) {
+        return user.getProjects().stream()
+                .filter(projectMember -> !projectMember.getProject().getProjectStatus().equals(ProjectStatus.COMPLETED))
+                .findAny().get();
+    }
+
+    @Override
+    public boolean hasNoActiveProject(User user) {
+        return user.getProjects().stream()
+                .allMatch(projectMember -> projectMember.getProject().getProjectStatus().equals(ProjectStatus.COMPLETED));
     }
 }

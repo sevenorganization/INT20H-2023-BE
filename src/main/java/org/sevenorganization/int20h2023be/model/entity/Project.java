@@ -1,19 +1,21 @@
 package org.sevenorganization.int20h2023be.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.sevenorganization.int20h2023be.model.enumeration.ProjectStatus;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "project")
 public class Project {
@@ -21,6 +23,7 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     @Column(nullable = false)
     private String title;
@@ -34,13 +37,13 @@ public class Project {
     private ProjectStatus projectStatus = ProjectStatus.WAITING;
 
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private List<ProjectMember> projectMembers;
+    private List<ProjectMember> projectMembers = new ArrayList<>();
 
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private Set<Invitation> invitations;
+    private Set<Invitation> invitations = new HashSet<>();
 
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private Set<Application> applications;
+    private Set<Application> applications = new HashSet<>();
 
     public Project(String title) {
         this.title = title;
