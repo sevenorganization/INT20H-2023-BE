@@ -1,7 +1,7 @@
 package org.sevenorganization.int20h2023be.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,12 +36,15 @@ public class Project {
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus = ProjectStatus.WAITING;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private List<ProjectMember> projectMembers = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private Set<Invitation> invitations = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private Set<Application> applications = new HashSet<>();
 

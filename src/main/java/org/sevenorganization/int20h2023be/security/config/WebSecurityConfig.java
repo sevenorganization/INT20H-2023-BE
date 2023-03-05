@@ -1,5 +1,6 @@
 package org.sevenorganization.int20h2023be.security.config;
 
+import lombok.RequiredArgsConstructor;
 import org.sevenorganization.int20h2023be.security.exceptionhandling.DefaultAccessDeniedHandler;
 import org.sevenorganization.int20h2023be.security.exceptionhandling.DefaultAuthenticationEntryPoint;
 import org.sevenorganization.int20h2023be.security.filter.JwtAuthorizationFilter;
@@ -8,7 +9,7 @@ import org.sevenorganization.int20h2023be.security.oauth2.HttpCookieOAuth2Author
 import org.sevenorganization.int20h2023be.security.oauth2.handler.OAuth2AuthenticationFailureHandler;
 import org.sevenorganization.int20h2023be.security.oauth2.handler.OAuth2AuthenticationSuccessHandler;
 import org.sevenorganization.int20h2023be.security.service.DefaultUserDetailsService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,6 +31,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
+
+    @Value("${app.frontend.url}")
+    private String frontendApp;
 
     private final DefaultAccessDeniedHandler defaultAccessDeniedHandler;
     private final DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint;
@@ -54,7 +58,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .cors()
-                .and()
+                    .and()
                 .csrf()
                     .disable()
                 .httpBasic()
@@ -109,7 +113,7 @@ public class WebSecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000/")
+                        .allowedOrigins(frontendApp)
                                 .allowedHeaders("*")
                                 .allowedMethods(
                                         HttpMethod.GET.name(),

@@ -2,10 +2,7 @@ package org.sevenorganization.int20h2023be.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.sevenorganization.int20h2023be.model.enumeration.ProjectRole;
-
-import java.util.Objects;
 
 @Getter
 @Setter
