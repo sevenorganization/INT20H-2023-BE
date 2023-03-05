@@ -1,6 +1,7 @@
 package org.sevenorganization.int20h2023be.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.sevenorganization.int20h2023be.model.entity.ProjectMemberKey;
 import org.sevenorganization.int20h2023be.model.entity.User;
 import org.sevenorganization.int20h2023be.model.entity.Project;
 import org.sevenorganization.int20h2023be.model.entity.ProjectMember;
@@ -26,7 +27,8 @@ public class DefaultProjectMemberService implements ProjectMemberService {
 
         invitationsRepository.deleteAll(user.getInvitations());
         applicationRepository.deleteAll(user.getApplications());
-
+        ProjectMemberKey projectMemberKey = new ProjectMemberKey(user.getId(), project.getId());
+        projectMember.setProjectMemberKey(projectMemberKey);
         return projectMemberRepository.save(projectMember);
     }
 

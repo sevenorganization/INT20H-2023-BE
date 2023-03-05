@@ -17,15 +17,15 @@ import java.util.Objects;
 public class ProjectMember {
 
     @EmbeddedId
-    private ProjectMemberKey id;
+    private ProjectMemberKey projectMemberKey;
 
     @ManyToOne
-    @MapsId("userId")
+    @MapsId("user_id")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @MapsId("projectId")
+    @MapsId("project_id")
     @JoinColumn(name = "project_id")
     private Project project;
 
@@ -37,18 +37,5 @@ public class ProjectMember {
         this.user = user;
         this.project = project;
         this.projectRole = projectRole;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProjectMember that = (ProjectMember) o;
-        return id != null && Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

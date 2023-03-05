@@ -22,9 +22,7 @@ public class DefaultProjectService implements ProjectService {
     public Project getCurrentProject(User user) {
         return user.getProjects().get(user.getProjects().size() - 1).getProject();
     }
-
-    private final CandidateService candidateService;
-
+    
     @Override
     public Project createProject(ProjectDto projectDto, User user) {
         Project project = projectRepository.save(new Project(
