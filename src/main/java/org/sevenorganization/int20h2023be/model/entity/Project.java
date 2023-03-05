@@ -51,6 +51,12 @@ public class Project {
         this.description = description;
     }
 
+    public Project(String title, String description, String repositoryUrl) {
+        this.title = title;
+        this.description = description;
+        this.repositoryUrl = repositoryUrl;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
